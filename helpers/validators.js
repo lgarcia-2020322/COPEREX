@@ -46,6 +46,15 @@ export const updateUserValidator = [
         .notEmpty(),
     body('email', 'Must be a valid email')
         .isEmail(),
-        
+
         validateErrors
 ];
+
+export const categoryValidator = [
+    body('name', 'Category name cannot be empty')
+        .notEmpty(),
+
+    body('description', 'Description cannot be empty')
+        .optional(),
+    validateErrors
+]
