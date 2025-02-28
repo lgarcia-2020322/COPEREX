@@ -5,7 +5,7 @@ import User from './user.model.js'
 export const getAll =async (req, res) => {
     try {
         const { limit = 20, skip = 0 } = req.query
-        const users = await User.find()  // ⚠️ Asegurar que sea `.find()` y no `.finde()`
+        const users = await User.find()
             .skip(skip)
             .limit(limit)
 
