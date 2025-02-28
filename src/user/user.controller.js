@@ -32,33 +32,75 @@ export const getAll =async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const { id } = req.params;
-        const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
+        const { id } = req.params
+        const user = await User.findById(id)
 
-        if (!updatedUser) {
-            return res.status(404).send({ message: 'User not found' });
+        if (!user) {
+            return res.status(404).send({
+                success: false,
+                message: 'User not found'
+            })
         }
 
-        return res.send({ message: 'User updated successfully', updatedUser });
+        if (user.status === false) {
+            return res.status(400).send({
+                success: false,
+                message: 'Cannot update a deactivated user'
+            })
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true })
+
+        return res.send({
+            success: true,
+            message: 'User updated successfully',
+            user: updatedUser
+        })
     } catch (err) {
-        return res.status(500).send({ message: 'Error updating user', err });
+        console.error(err)
+        return res.status(500).send({
+            success: false,
+            message: 'General error',
+            err
+        })
     }
-};
+}
 
 export const deleteUser = async (req, res) => {
     try {
-        const { id } = req.params;
-        const user = await User.findById(id);
+        const { id } = req.params
+        const user = await User.findById(id)
 
         if (!user) {
-            return res.status(404).send({ message: 'User not found' });
+            return res.status(404).send({
+                success: false,
+                message: 'User not found'
+            })
         }
 
-        user.status = false;
-        await user.save();
+        if (user.status === false) {
+            return res.status(400).send({
+                success: false,
+                message: 'User is already deactivated'
+            }
+        )
+        }
 
-        return res.send({ message: 'User deactivated successfully' });
+        user.status = false
+        await user.save()
+
+        return res.send({
+            success: true,
+            message: 'User deactivated successfully'
+        }
+    )
     } catch (err) {
-        return res.status(500).send({ message: 'Error deactivating user', err });
+        console.error(err)
+        return res.status(500).send({
+            success: false,
+            message: 'General error',
+            err
+        }
+    )
     }
-};
+}

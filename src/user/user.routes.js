@@ -20,7 +20,7 @@ api.put(
     updateUser
 )
 
-api.put(
+api.delete(
     '/delete/:id',
     [validateJwt], 
     deleteUser
