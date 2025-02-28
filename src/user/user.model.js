@@ -1,4 +1,3 @@
-// crear repositorio GIT
 
 import { Schema, model } from 'mongoose'
 

@@ -2,7 +2,7 @@ import { body } from "express-validator" //Capturar todo el body de la solicitud
 import { validateErrors } from "./validate.error.js"
 import { existUsername, existEmail } from "./db.validators.js"
 
-// comit de helpers
+
 export const registerValidator = [
     body('name', 'Name cannot be empty')
         .notEmpty(),
@@ -38,3 +38,12 @@ export const loginValidator = [
         .isLength({min: 8}),
         validateErrors
 ]
+
+export const updateUserValidator = [
+    body('name', 'Name cannot be empty')
+        .notEmpty(),
+    body('surname', 'Surname cannot be empty').notEmpty(),
+    body('email', 'Must be a valid email')
+        .isEmail(),
+        validateErrors
+];

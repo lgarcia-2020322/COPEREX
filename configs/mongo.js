@@ -1,6 +1,6 @@
 //Conexión
 import mongoose, { disconnect } from 'mongoose'
-// comit de mongo
+
 export const connect = async()=>{
     try{
         mongoose.connection.on('error', ()=>{

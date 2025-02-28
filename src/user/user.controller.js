@@ -2,69 +2,65 @@
 
 import User from './user.model.js'
 
-export const getAll = async(req,res)=>{
+export const getAll =async (req, res) => {
     try {
-        const { limit = 20, skip = 0} = req.query
-        const users = await User.finde()
-            .skip
+        const { limit = 20, skip = 0 } = req.query
+        const users = await User.find()  // ⚠️ Asegurar que sea `.find()` y no `.finde()`
+            .skip(skip)
             .limit(limit)
-        if (users.length === 0) return res.status(404).send(
-            {
-                message: 'Users not found',
-                succses: false
-            }
-        )
-        return res.send(
-            {
-                succses: true,
-                message: 'Users found: ',
-                users,
-                total: users.length
-            }
-        )
-        
-    } catch (err) {
-        console.error(err)
-        return res.status(500).send(
-            {
-                succses: false,
-                message: 'General error',
-                err
-            }
-        )
-        
-    }
-}
 
-export const updateUser = async (req,res)=>{
-    try {
-        const { id } = req.params
-        const { password, role, status, ...updateData } = req.body
-        const user = await User.findByIdAndUpdate(id, updateData, {new: true})
-
-        if(!user){
-            return res.status(404).send(
-                {
-                    succses: false,
-                    message: 'User not found'
-                }
-            )
+        if (users.length === 0) {
+            return res.status(404).send({
+                success: false,
+                message: 'Users not found'
+            })
         }
-        return res.send(
-            {
-                succses: true,
-                message: `User updated`,
-                user
-            }
-        )
+
+        return res.send({
+            success: true,
+            message: 'Users found',
+            users,
+            total: users.length
+        })
     } catch (err) {
         console.error(err)
-        return res.status(500).send(
-            {
-                succses: false,
-                message: 'General error',
-                err
-            }
-        )
+        return res.status(500).send({
+            success: false,
+            message: 'General error',
+            err
+        })
     }
 }
+
+export const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
+
+        if (!updatedUser) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+
+        return res.send({ message: 'User updated successfully', updatedUser });
+    } catch (err) {
+        return res.status(500).send({ message: 'Error updating user', err });
+    }
+};
+
+export const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(id);
+
+        if (!user) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+
+        user.status = false;
+        await user.save();
+
+        return res.send({ message: 'User deactivated successfully' });
+    } catch (err) {
+        return res.status(500).send({ message: 'Error deactivating user', err });
+    }
+};

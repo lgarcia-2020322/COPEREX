@@ -1,8 +1,9 @@
 'use strict'
-// comit de app.js
+
 import express from 'express'
 import morgan from 'morgan'
 import authRoutes from '../src/auth/auth.routes.js'
+import userRoutes from '../src/user/user.routes.js'
 import { limiter } from '../middlewares/rate.limit.js'
 
 const configs = (app) =>{
@@ -14,13 +15,14 @@ const configs = (app) =>{
 
 const routes = (app)=>{
     app.use(authRoutes)
+    app.use('/v1/user', userRoutes)
 
 }
 
 export const initServer = async()=>{
-    const app = express() //express
+    const app = express() 
     try{
-        configs(app) //configuraciones al servidor
+        configs(app)
         routes(app)
         app.listen(process.env.PORT)
         console.log(`Server running in port ${process.env.PORT}`)

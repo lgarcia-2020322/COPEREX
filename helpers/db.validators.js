@@ -1,5 +1,5 @@
 import User from '../src/user/user.model.js'
-// comit de helpers
+
 export const existUsername = async(username)=>{
     const alreadyUsername = await User.findOne({username})
     if(alreadyUsername){
