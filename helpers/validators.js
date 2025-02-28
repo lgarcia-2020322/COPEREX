@@ -42,8 +42,10 @@ export const loginValidator = [
 export const updateUserValidator = [
     body('name', 'Name cannot be empty')
         .notEmpty(),
-    body('surname', 'Surname cannot be empty').notEmpty(),
+    body('surname', 'Surname cannot be empty')
+        .notEmpty(),
     body('email', 'Must be a valid email')
         .isEmail(),
+        
         validateErrors
 ];

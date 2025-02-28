@@ -1,7 +1,7 @@
 import User from '../user/user.model.js'
 import { checkPassword, encrypt } from '../../utils/encrypt.js'
 import { generateJwt } from '../../utils/jwt.js'
-// commit de register
+
 export const register = async (req,res)=>{
     
     try {
@@ -38,7 +38,7 @@ export const register = async (req,res)=>{
         return res.status(500).send({message: 'General error', err})
     }
 }
-//comit de login
+
 export const login = async(req, res)=>{
     try{
         let { userLoggin, password } = req.body

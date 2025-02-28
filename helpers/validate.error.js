@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator"
-// comit de helpers
+
 export const validateErrors = (req, res, next)=>{
     const errors = validationResult(req)
    
