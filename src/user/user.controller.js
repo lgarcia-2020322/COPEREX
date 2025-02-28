@@ -1,5 +1,3 @@
-// get all
-
 import User from './user.model.js'
 
 export const getAll =async (req, res) => {
