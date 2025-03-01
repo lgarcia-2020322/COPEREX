@@ -60,7 +60,7 @@ export const generateReport = async (req, res) => {
                 )
             }
 
-            // Opcional: Eliminar el archivo después de enviarlo
+            // se puede eliminar el archivo despues de enviarlo
             try {
                 await unlink(filePath)
             } catch (unlinkErr) {
