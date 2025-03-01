@@ -58,3 +58,19 @@ export const categoryValidator = [
         .optional(),
     validateErrors
 ]
+
+export const companyValidator = [
+    body('name', 'Company name cannot be empty')
+        .notEmpty(),
+
+    body('impactLevel', 'Impact level cannot be empty')
+        .notEmpty(),
+
+    body('yearsOfExperience', 'Years of experience must be a positive number')
+        .isInt({ min: 0 }),
+
+    body('category', 'Category ID must be a valid Mongo ID')
+        .isMongoId(),
+
+    validateErrors
+]
