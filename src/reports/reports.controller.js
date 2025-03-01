@@ -1,10 +1,9 @@
 import ExcelJS from 'exceljs'
 import Company from '../company/company.model.js'
-import { unlink } from 'fs/promises'
 import { join } from 'path'
 import fs from 'fs'
 
-// Crear carpeta si no existe donde se ponen los archivos excel
+// Crear carpeta si no existe
 const reportsPath = join('uploads', 'reports')
 if (!fs.existsSync(reportsPath)) {
     fs.mkdirSync(reportsPath, { recursive: true })
@@ -49,24 +48,13 @@ export const generateReport = async (req, res) => {
 
         await workbook.xlsx.writeFile(filePath)
 
-        return res.download(filePath, fileName, async (err) => {
-            if (err) {
-                console.error('Error sending file:', err)
-                return res.status(500).send(
-                    {
-                        success: false,
-                        message: 'Error generating report'
-                    }
-                )
+        return res.send(
+            {
+                success: true,
+                message: 'Archivo creado con éxito',
+                filePath: `/uploads/reports/${fileName}` // Enlace donde se guarda el archivo
             }
-
-            // se puede eliminar el archivo despues de enviarlo
-            try {
-                await unlink(filePath)
-            } catch (unlinkErr) {
-                console.error('Error deleting file:', unlinkErr)
-            }
-        })
+        )
     } catch (err) {
         console.error(err)
         return res.status(500).send(

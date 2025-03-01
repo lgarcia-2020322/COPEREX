@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { generateReport } from './report.controller.js'
+import { generateReport } from './reports.controller.js'
 import { validateJwt } from '../../middlewares/validate.jwt.js'
 
 const api = Router()
