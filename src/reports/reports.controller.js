@@ -24,14 +24,14 @@ export const generateReport = async (req, res) => {
 
         const workbook = new ExcelJS.Workbook()
         const worksheet = workbook.addWorksheet('Companies Report')
-
+        .// lo que lleva las columnas en excel
         worksheet.columns = [
             { header: 'Company Name', key: 'name', width: 25 },
             { header: 'Impact Level', key: 'impactLevel', width: 20 },
             { header: 'Years of Experience', key: 'yearsOfExperience', width: 20 },
             { header: 'Category', key: 'category', width: 25 }
         ]
-
+        // datos del archivo
         companies.forEach(company => {
             worksheet.addRow(
                 {
@@ -43,7 +43,7 @@ export const generateReport = async (req, res) => {
             )
         })
 
-        const fileName = `companies_report_${Date.now()}.xlsx`
+        const fileName = `companies_report_${Date.now()}.xlsx` // se pone con  la fecha en la que se crea con la cantidad de milisegundos que han pasado desde el 1 de enero de 1970 a las 00:00:00 UTC
         const filePath = join(reportsPath, fileName)
 
         await workbook.xlsx.writeFile(filePath)
