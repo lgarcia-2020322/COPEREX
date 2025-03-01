@@ -1,0 +1,632 @@
+{
+	"info": {
+		"_postman_id": "1a6c95cf-7983-4a7e-ab0a-ea02b33dd957",
+		"name": "COPEREX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41477858"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Sergio",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Garcia",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "sgarcia",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sgarcia@kinal.edu.gt",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "AbcD1234#",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "123456789123",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "CLIENT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);\r",
+									"postman.setGlobalVariable(\"token\", data.token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userLoggin",
+									"value": "jgarcia",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "AbcD1234#",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/user/getAll",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"user",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "sergio",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Garcia",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "sgarcia",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "sgarcia@kinal.edu.gt",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "123456789122",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/user/updateProfile/67c1fccdc5a9f306ba76f6d5",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"user",
+								"updateProfile",
+								"67c1fccdc5a9f306ba76f6d5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/user/delete/67c1fccdc5a9f306ba76f6d5",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"user",
+								"delete",
+								"67c1fccdc5a9f306ba76f6d5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Tengologia",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Empresas dedicadas a la tecnologia",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/category/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"category",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/category/getAll",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"category",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Tecnologias",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Empresas dedicadas a la tecnologia",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/category/update/67c1fe81b9f798c86d250eba",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"category",
+								"update",
+								"67c1fe81b9f798c86d250eba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Tecnologias",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Empresas dedicadas a la tecnologia",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/category/delete/67c1fe81b9f798c86d250eba",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"category",
+								"delete",
+								"67c1fe81b9f798c86d250eba"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "company",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "OpenIA",
+									"type": "text"
+								},
+								{
+									"key": "impactLevel",
+									"value": "Alto",
+									"type": "text"
+								},
+								{
+									"key": "yearsOfExperience",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67c2745e0efa8d53e95fee31",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/company/add",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"company",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "filter",
+									"value": "A-Z",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/company/getAll?filter=years",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"company",
+								"getAll"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "years"
+								},
+								{
+									"key": "filter",
+									"value": "67c2745e0efa8d53e95fee31",
+									"disabled": true
+								},
+								{
+									"key": "filter",
+									"value": "Z-A",
+									"disabled": true
+								},
+								{
+									"key": "filter",
+									"value": "A-Z",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Google",
+									"type": "text"
+								},
+								{
+									"key": "impactLevel",
+									"value": "Bajo",
+									"type": "text"
+								},
+								{
+									"key": "yearsOfExperience",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "67c2745e0efa8d53e95fee31",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3626/v1/company/update/67c2753d901806b4179f21c6",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"company",
+								"update",
+								"67c2753d901806b4179f21c6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reports",
+			"item": [
+				{
+					"name": "add",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:3626/v1/reports/generate",
+							"host": [
+								"localhost"
+							],
+							"port": "3626",
+							"path": [
+								"v1",
+								"reports",
+								"generate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
